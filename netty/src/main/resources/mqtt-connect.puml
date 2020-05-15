@@ -1,0 +1,6 @@
+@startuml
+Clinet -> MQTTBroker : CONNECT
+MQTTBroker -> MQTTBroker : auth
+MQTTBroker -> MQTTBroker : socketIdel = keepalive*3
+MQTTBroker -> Clinet : CONACK
+@enduml

@@ -1,0 +1,191 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.power7000</groupId>
+  <artifactId>power7000-hes-protocol-gdw</artifactId>
+  <version>1.0.0</version>
+  <packaging>jar</packaging>
+
+  <name>power7000-hes-protocol-gdw</name>
+  <url>http://maven.apache.org</url>
+
+  <!-- 发布到私服仓库 -->
+	<distributionManagement>
+		<repository>
+			<id>power7000</id>
+			<url>http://58.251.74.101:6208/nexus/content/repositories/power7000</url>
+		</repository>
+	</distributionManagement>
+
+	<properties>
+		<skip_maven_deploy>false</skip_maven_deploy>
+	</properties>
+	
+	<dependencies>
+		<!-- power7000-protocol-core -->
+		<dependency>
+			<groupId>com.power7000</groupId>
+			<artifactId>power7000-hes-protocol-core</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+	</dependencies>
+
+	<!-- 项目站点报告 -->  
+	<reporting>
+	   <plugins>
+           <!-- 项目基本信息报告 -->   
+           <plugin>
+               <groupId>org.apache.maven.plugins</groupId>   
+               <artifactId>maven-project-info-reports-plugin</artifactId>   
+               <version>2.8.1</version>   
+               <configuration>   
+                   <dependencyDetailsEnabled>true</dependencyDetailsEnabled>   
+                   <dependencyLocationsEnabled>false</dependencyLocationsEnabled>   
+               </configuration>   
+           </plugin> 
+           
+           
+           <!-- 项目API doc报告(Required)  -->   
+           <plugin>   
+               <groupId>org.apache.maven.plugins</groupId>   
+               <artifactId>maven-javadoc-plugin</artifactId>   
+               <version>2.9.1</version>  
+               <configuration>  
+                    <aggregate>true</aggregate>  
+                    <charset>UTF-8</charset>  
+                    <encoding>UTF-8</encoding>  
+                    <docencoding>UTF-8</docencoding>  
+                </configuration>   
+           </plugin> 
+           
+           
+           <!-- 测试报告 -->   
+	       <plugin>
+	           <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-surefire-report-plugin</artifactId>
+               <!-- TODO: 2.7.2: Error getting reports from the plugin 'org.apache.maven.plugins:maven-surefire-report-plugin:2.7.2':
+               Unable to load the mojo 'org.apache.maven.plugins:maven-surefire-report-plugin:2.7.2:report' in the plugin 'org.apache.maven.plugins:maven-surefire-report-plugin'.
+               A required class is missing: org/apache/maven/reporting/AbstractMavenReport -->
+              <version>2.7.1</version>
+           </plugin>  
+             
+            <!-- 项目还需要做的TODO报告(Required) -->   
+            <plugin>   
+                <groupId>org.codehaus.mojo</groupId>   
+                <artifactId>taglist-maven-plugin</artifactId> 
+                <version>2.4</version>  
+            </plugin>
+            
+            <!-- 项目源代码分析报告(Required) -->   
+            <plugin>   
+               <groupId>org.apache.maven.plugins</groupId>   
+               <artifactId>maven-pmd-plugin</artifactId>   
+               <version>2.5</version>   
+               <configuration>   
+                   <linkXref>true</linkXref>   
+                   <sourceEncoding>UTF-8</sourceEncoding>   
+                   <minimumTokens>100</minimumTokens>   
+                   <targetJdk>1.7</targetJdk>   
+               </configuration>   
+           </plugin>  
+           
+           
+           <!-- 生成站点文件具体信息报告(Required,But very slow) -->   
+           <!-- <plugin>   
+               <groupId>org.apache.maven.plugins</groupId>   
+               <artifactId>maven-linkcheck-plugin</artifactId>   
+               <version>1.1</version>   
+               <configuration>   
+               </configuration>   
+           </plugin>-->   
+            
+           <!-- 单元测试覆盖率报告(Required) -->   
+           <plugin>   
+               <groupId>org.codehaus.mojo</groupId>   
+               <artifactId>cobertura-maven-plugin</artifactId>   
+               <version>2.7</version>
+           </plugin>      
+
+	   
+		   <!-- 检查代码规范报告(Required) -->   
+	       <plugin>
+			  <groupId>org.apache.maven.plugins</groupId>
+			  <artifactId>maven-checkstyle-plugin</artifactId>
+			  <version>2.15</version>
+		      <configuration>
+                    <configLocation>checkstyle.xml</configLocation>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <failsOnError>false</failsOnError>
+               </configuration>    
+	       </plugin> 
+	       
+		
+		   <!-- findbugs报告(Required) -->   
+	       <plugin>   
+			  <groupId>org.codehaus.mojo</groupId>
+			  <artifactId>findbugs-maven-plugin</artifactId>
+			  <version>3.0.4</version>
+	       </plugin> 
+       
+       </plugins>  
+               
+    </reporting>   
+
+	<build>
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.4</version>
+			</plugin>
+
+
+			<!-- 是否跳过单元测试 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.12.4</version>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+			
+			<!-- maven 的site 站点插件 -->
+			<plugin>  
+				<groupId>org.apache.maven.plugins</groupId>  
+				<artifactId>maven-site-plugin</artifactId>  
+				<version>3.3</version>  
+					<configuration>  
+					    <!-- 配置报告信息 -->   
+						<locales>zh_CN</locales>  
+						<encoding>UTF-8</encoding>
+					</configuration>  
+			</plugin>  
+
+		</plugins>
+	</build>
+</project>

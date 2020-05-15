@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Build-Number: 1
+Class-Path: ./
+Build-Jdk: 1.7.0_17
+Built-By: Administrator
+Created-By: Apache Maven 3.1.1
+Main-Class: com.power7000.hes.simulation.main.Starter
+Archiver-Version: Plexus Archiver
+

@@ -1,0 +1,6 @@
+server:
+  port: 9222
+spring:
+  data:
+     mongodb:
+       uri: mongodb://10.29.250.107:27017/orangeDB

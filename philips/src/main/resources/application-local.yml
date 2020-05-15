@@ -1,0 +1,6 @@
+server:
+  port: 9222
+spring:
+  data:
+     mongodb:
+       uri: mongodb://oegrt:qweqwecz123dsfs12shawe@47.106.94.189:27017/orangeiot
